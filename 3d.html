@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./js/jQuery.js"></script>
+    <style>
+        .scene{
+            width: 300px;
+            height: 300px;
+            /*border: 1px solid black;*/
+            margin: 100px auto;
+            perspective: 800px;
+        }
+        .box{
+            width: 100%;
+            height: 100%;
+            /*transition:transform 5s ease;*/
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        /*.box:hover{*/
+            /*transform:rotate3d(0,1,0,360deg);*/
+        /*}*/
+        .box div{
+            width: 100%;
+            height: 100%;
+            background: url('./images/dadada.jpg');
+            position: absolute;
+            left: 0;
+            top: 0;
+            text-align: center;
+            line-height: 300px;
+            font-size: 3rem;
+            color: #fff;
+        }
+        .box div:nth-child(1){
+            /*background: red;*/
+            transform:translate3d(0,0,-150px) rotateX(0deg);
+        }
+        .box div:nth-child(2){
+            /*background: blue;*/
+            transform:translate3d(150px,0,0) rotateY(90deg);
+        }
+        .box div:nth-child(3){
+            /*background: green;*/
+            transform:translate3d(-150px,0,0) rotateY(-90deg);
+        }
+        .box div:nth-child(4){
+            /*background: yellow;*/
+            transform:translate3d(0,-150px,0) rotateX(90deg);
+        }
+        .box div:nth-child(5){
+            /*background: pink;*/
+            transform:translate3d(0,150px,0) rotateX(-90deg);
+        }
+        .box div:nth-child(6){
+            /*background: #aaa;*/
+            transform:translate3d(0,0,150px) rotateX(0deg);
+        }
+        .item{
+            width: 0;
+            height: 0;
+            border-top: 0 solid rgba(0,0,0,0);
+            border-left: 50px solid rgba(0,0,0,0);
+            border-right: 50px solid rgba(0,0,0,0);
+            border-bottom: 100px solid rgba(0,0,0,1);
+        }
+    </style>
+    <script>
+        $(function(){
+            var cx=$('.box').offset().left+$('.box').width()/2;
+            var cy=$('.box').offset().top+$('.box').height()/2;
+            $(document).mousemove(function(e){
+                var px= e.pageX-cx;
+                var py= e.pageY-cy;
+                var pz=0;
+                var m=Math.sqrt(px*px+py*py+pz*pz);
+                var mx=px/m;
+                var my=py/m;
+                var mz=pz/m;
+                $('.box').css({transform:'rotate3d('+mx+','+my+','+mz+','+m+'deg)'})
+            })
+        })
+    </script>
+</head>
+<body>
+    <!-- <div class="item"></div> -->
+    <div class="scene">
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</body>
+</html>
